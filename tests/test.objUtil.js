@@ -1,4 +1,5 @@
-import { assert, test } from '../src/testing.js';
+import { assert } from '../src/assertion.js';
+import { test } from '../src/testing.js';
 import { jsonCopy } from '../src/objUtil.js';
 
 export const testJsonCopy = () => (test('testJsonCopy', async () => {

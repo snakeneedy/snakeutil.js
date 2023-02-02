@@ -1,4 +1,5 @@
-import { AssertionError, assert, test } from '../src/testing.js';
+import { AssertionError, assert } from '../src/assertion.js';
+import { test } from '../src/testing.js';
 
 export const testAssertionError = () => (test('testAssertionError', async () => {
   const err = new AssertionError();
