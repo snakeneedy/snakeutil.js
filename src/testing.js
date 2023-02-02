@@ -1,18 +1,31 @@
-export const test = async (title, callback = async () => {}, times = 1000) => {
+const testingSequence = [];
+const DEFAULT_TIMES = 1000000;
+
+const testJob = (title, callback = async () => {}) => (async (times = DEFAULT_TIMES) => {
   try {
-    const beginTime = performance.now();
-    while (times > 0) {
+    console.time(title);
+    for (; times > 0; times -= 1) {
       const result = callback();
       if (result instanceof Promise) await result;
-      times -= 1;
     }
-    const endTime = performance.now();
-    console.log('-', title, endTime - beginTime, 'ms');
-  } catch(err) {
-    console.error('X', title, err);
+    console.timeEnd(title);
+  } catch (err) {
+    console.error(title + ':', err);
   }
+});
+
+export const test = (title, callback = async () => {}) => {
+  testingSequence.push(testJob(title, callback));
+};
+
+export const runTest = async (times = DEFAULT_TIMES) => {
+  while (testingSequence.length) {
+    const callback = testingSequence.shift();
+    await callback(times);
+  };
 };
 
 export default {
   test,
+  runTest,
 };

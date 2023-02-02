@@ -1,12 +1,11 @@
 import { assert } from '../src/assertion.js';
-import { test } from '../src/testing.js';
 import { makeAsync } from '../src/funcUtil.js';
 
-export const testMakeAsync = () => (test('testMakeAsync', async () => {
+export const testMakeAsync = () => {
   const syncFunc = () => {};
   const asyncFunc = makeAsync(syncFunc);
   assert(asyncFunc() instanceof Promise);
-}));
+};
 
 export default {
   testMakeAsync,

@@ -1,11 +1,10 @@
 import { assert } from '../src/assertion.js';
-import { test } from '../src/testing.js';
 import CustomError from '../src/CustomError.js';
 
-export const testCustomError = () => (test('testCustomError', async () => {
+export const testCustomError = () => {
   const err = new CustomError();
   assert(err.name === 'CustomError');
-}));
+};
 
 export default {
   testCustomError,
